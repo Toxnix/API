@@ -1,0 +1,5 @@
+password: pwd
+port: 3306
+dbName: mineplot
+host: localhost
+username: root

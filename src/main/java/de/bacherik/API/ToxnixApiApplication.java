@@ -1,0 +1,36 @@
+package de.bacherik.API;
+
+import net.bytemc.evelon.DatabaseProtocol;
+import net.bytemc.evelon.Evelon;
+import net.bytemc.evelon.cradinates.DatabaseCradinates;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+@RestController
+public class ToxnixApiApplication {
+
+	public static void main(String[] args) {
+		// DatabaseConfig dbConfig = new DatabaseConfig("./", "database.yml");
+		// dbConfig.add();
+		// Evelon
+		Evelon.setCradinates(new DatabaseCradinates(
+				DatabaseProtocol.MYSQL, //type of sql server
+				"hostname", //hostname
+				"password", //password
+				"username", //username
+				"database", //database
+				3306 //port
+		));
+
+		// Spring boot
+		SpringApplication.run(ToxnixApiApplication.class, args);
+	}
+	@GetMapping("/hello")
+	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+		return String.format("Hello %s!", name);
+	}
+}
